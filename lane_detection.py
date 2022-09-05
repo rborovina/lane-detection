@@ -9,12 +9,13 @@ from tkinter import filedialog
 #Set up GUI
 window = tk.Tk()  #Makes main window
 window.wm_title("Lane detection")
-window.state('zoomed')
+window.geometry("300x300")
 
 window.config(background="#FFFFFF")
 
 #Graphics window
 imageFrame = tk.Frame(window, width=300, height=300)
+imageFrame.config(background="#FFFFFF")
 imageFrame.grid(row=0, column=0, padx=10, pady=2)
 
 stop = True
@@ -149,23 +150,29 @@ def select_video():
         global cap
         cap = cv2.VideoCapture(path)
         stop = False
+        window.state('zoomed')
         show_frame()
 
 
 display1 = tk.Label(imageFrame)
+display1.config(background="#FFFFFF")
 display1.grid(row=0, column=0, padx=10, pady=2)  #Display 1
 display2 = tk.Label(imageFrame)
+display2.config(background="#FFFFFF")
 display2.grid(row=1, column=0, padx=10, pady=2) #Display 2
 display3 = tk.Label(imageFrame)
+display3.config(background="#FFFFFF")
 display3.grid(row=0, column=1, padx=10, pady=2) #Display 3
 display4 = tk.Label(imageFrame)
+display4.config(background="#FFFFFF")
 display4.grid(row=1, column=1, padx=10, pady=2) #Display 4
 display5 = tk.Button(window, text="Select a Video :)", command=select_video)
 display5.grid(row=2, column=0)
 
 #Slider window (slider controls stage position)
-sliderFrame = tk.Frame(window, width=600, height=100)
-sliderFrame.grid(row = 600, column=0, padx=10, pady=2)
+sliderFrame = tk.Frame(window, width=300, height=300)
+sliderFrame.config(background="#FFFFFF")
+sliderFrame.grid(row=600, column=0, padx=10, pady=2)
 
 #Capture video frames
 #cap = cv2.VideoCapture("test.mp4")
