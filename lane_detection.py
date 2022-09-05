@@ -160,7 +160,7 @@ display3 = tk.Label(imageFrame)
 display3.grid(row=0, column=1, padx=10, pady=2) #Display 3
 display4 = tk.Label(imageFrame)
 display4.grid(row=1, column=1, padx=10, pady=2) #Display 4
-display5 = tk.Button(window, text="Select an image", command=select_video)
+display5 = tk.Button(window, text="Select a Video :)", command=select_video)
 display5.grid(row=2, column=0)
 
 #Slider window (slider controls stage position)
