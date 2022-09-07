@@ -117,8 +117,15 @@ def show_frame():
 
         cv2.fillPoly(frame, [points], color=[233, 233, 233, 0.4])
         '''
-
         averaged_lines = average_slope_intercept(frame, lines)
+        try:
+            points = np.array(
+                [[averaged_lines[0][0][0], averaged_lines[0][0][1]], [averaged_lines[0][0][2], averaged_lines[0][0][3]], [averaged_lines[1][0][2], averaged_lines[1][0][3]],
+                 [averaged_lines[1][0][0], averaged_lines[1][0][1]]])
+
+            cv2.fillPoly(frame, pts=[points], color=(233, 233, 233, 0.2))
+        except:
+            pass
         line_image = display_lines(frame, averaged_lines)
         # cv2.imshow("lines", line_image)
 
@@ -134,13 +141,13 @@ def show_frame():
 
         display1.imgtk = original  # Shows frame for display 1
         display1.configure(image=original)
-        display2.imgtk = cropped  # Shows frame for display 2
-        display2.configure(image=cropped)
-        display3.imgtk = canny  # Shows frame for display 3
-        display3.configure(image=canny)
+        display2.imgtk = canny  # Shows frame for display 2
+        display2.configure(image=canny)
+        display3.imgtk = cropped  # Shows frame for display 3
+        display3.configure(image=cropped)
         display4.imgtk = result  # Shows frame for display 4
         display4.configure(image=result)
-        window.after(10, show_frame)
+        window.after(1, show_frame)
 
 def select_video():
     global stop
