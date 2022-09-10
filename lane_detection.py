@@ -67,7 +67,8 @@ def display_lines(img, lines):
         for line in lines:
             for x1, y1, x2, y2 in line:
                 try:
-                    cv2.line(line_image, (x1, y1), (x2, y2), (153, 0, 0), 6)
+                    if not(x1==0 and y1==0) or not(x2==0 and y2==0):
+                        cv2.line(line_image, (x1, y1), (x2, y2), (153, 0, 0), 6)
                 except:
                     print(line)
 
@@ -102,28 +103,15 @@ def show_frame():
         canny = Image.fromarray(cropped_canny)
 
         lines = cv2.HoughLinesP(cropped_canny, 2, np.pi / 180, 50, np.array([]), minLineLength=40, maxLineGap=5)
-        '''
-        h, w = frame.shape[:2]
-
-        x = np.arange(w)
-        polynomial1 = lambda x: x ** 2 / 800
-        polynomial2 = lambda x: x + 200
-        y1 = polynomial1(x)
-        y2 = polynomial2(x)
-
-        points1 = np.array([[[xi, yi]] for xi, yi in zip(x, y1) if (0 <= xi < w and 0 <= yi < h)]).astype(np.int32)
-        points2 = np.array([[[xi, yi]] for xi, yi in zip(x, y2) if (0 <= xi < w and 0 <= yi < h)]).astype(np.int32)
-        points = np.concatenate((points1, np.flip(points2, 0)))
-
-        cv2.fillPoly(frame, [points], color=[233, 233, 233, 0.4])
-        '''
         averaged_lines = average_slope_intercept(frame, lines)
         try:
             points = np.array(
                 [[averaged_lines[0][0][0], averaged_lines[0][0][1]], [averaged_lines[0][0][2], averaged_lines[0][0][3]], [averaged_lines[1][0][2], averaged_lines[1][0][3]],
-                 [averaged_lines[1][0][0], averaged_lines[1][0][1]]])
+                [averaged_lines[1][0][0], averaged_lines[1][0][1]]])
 
-            cv2.fillPoly(frame, pts=[points], color=(233, 233, 233, 0.2))
+            if (averaged_lines[0][0][0] != 0 and averaged_lines[0][0][1] != 0 and averaged_lines[0][0][2] != 0 and averaged_lines[0][0][3] != 0)\
+                and (averaged_lines[1][0][0] != 0 and averaged_lines[1][0][1] != 0 and averaged_lines[1][0][2] != 0 and averaged_lines[1][0][3] != 0):
+                cv2.fillPoly(frame, pts=[points], color=(233, 233, 233, 0.2))
         except:
             pass
         line_image = display_lines(frame, averaged_lines)
