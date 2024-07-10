@@ -1,7 +1,7 @@
-# LaneDetection
+# Lane Detection
 
 ## Introduction
-LaneDetection is a Python application developed as part of a fourth-year project for the AI course at the Faculty of Electrical Engineering in East Sarajevo. It is designed to detect and highlight lanes on a road from a video source. This project utilizes OpenCV for computer vision tasks and Tkinter for the graphical user interface.
+Lane Detection is a Python application developed as part of a fourth-year project for the AI course at the University of East Sarajevo - School of Electrical Engineering.
 
 ## Features
 - Real-time lane detection from a video source.
@@ -30,7 +30,7 @@ To run the LaneDetection project you can run the command: `docker-compose up`
 
 ## License
 
-This application was created for educational purposes and is available under an open license. Feel free to use and adapt it to your needs.
+This application under MIT license.
 
 ## Contact
 
